@@ -28,6 +28,7 @@
                             <thead>
                                 <tr>
                                     <th>Nom du système</th>
+                                    <th>Multi Carte</th>
                                     <th style="text-align: center">Lancement sur client</th>
                                     <th>Port de début</th>
                                     <th>Maps</th>
@@ -39,6 +40,7 @@
                                 @foreach($data as $key => $value)
                                 <tr>
                                     <td><strong>{{ $key }}</strong></td>
+                                    <td align="center">{!! boolval($value['multi-map']) ? '<span class="badge badge-success"><i class="fa fa-check"></i> Oui</span>' : '<span class="badge badge-danger"><i class="fa fa-times"></i> Non</span>' !!}</td>
                                     <td align="center">{!! !boolval($value['local']) ? '<span class="badge badge-success"><i class="fa fa-check"></i> Oui</span>' : '<span class="badge badge-danger"><i class="fa fa-times"></i> Non</span>' !!}</td>
                                     <td>{{ $value['starter-port'] }} <b>(tcp)</b></td>
                                     <td>{!! $value['maps'] !!}</td>

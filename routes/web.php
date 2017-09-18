@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', 'Controller@dashboardAction')->name("dashboard");
-
 Auth::routes();
+Route::get('/', 'Controller@dashboardAction')->name("dashboard");
 
 Route::get('/systems/list', 'ManagementController@systemsListAction')->name('management.systems.list');
 Route::get('/systems/manage/{system}', 'ManagementController@manageSystemAction')->name('management.systems.manage');

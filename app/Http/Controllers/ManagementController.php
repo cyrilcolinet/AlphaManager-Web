@@ -48,6 +48,7 @@ class ManagementController extends Controller {
             $array['plugins'] = join(", ", $plugins);
 
             $array['local'] = ($array['local'] == "true" ? true : false);
+            $array['multi-map'] = ($array['multi-map'] == "true" ? true : false);
             $data = array_add($data, $systemName, $array);
         }
 
@@ -79,7 +80,7 @@ class ManagementController extends Controller {
             $plugins[count($plugins)] = "AlphasiaManagerBukkit";
             $array['plugins'] = '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="' . join(", ", $plugins) . '">Voir&nbsp;les&nbsp;plugins...</a>';
 
-            $array['local'] = ($array['local'] == "true" ? true : false);
+            $array['multi-map'] = ($array['multi-map'] == "true" ? true : false);
             $data = array_add($data, $systemName, $array);
         }
 
@@ -146,7 +147,18 @@ class ManagementController extends Controller {
         if($system == "" || empty($system) || is_null($system))
             throw new NotFoundHttpException();
 
-        return "fraise";
+        $connector = Redis::connection();
+        $keys = $connector->keys("alphamanager:_config:maps:" . $system . ":*");
+        $infos = $connector->hgetall("alphamanager:_config:systems:" . $system);
+        $maps = array();
+
+        foreach($keys as $key) {
+            $keyResult = $connector->hgetall($key);
+            $keyResult['startup-mode'] = strtoupper(trim($keyResult['startup-mode']));
+            $maps[$keyResult['name']] = $keyResult;
+        }
+
+        return view("management.systems.manage", compact("maps", "infos"));
     }
 
     /**
