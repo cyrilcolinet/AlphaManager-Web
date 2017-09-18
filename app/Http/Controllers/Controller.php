@@ -20,6 +20,10 @@ class Controller extends BaseController {
         $this->middleware("auth");
     }
 
+    public function getAvailablePlugins() {
+        return Redis::lrange("alphamanager:_config:plugins", 0, -1);
+    }
+
     public function dashboardAction() {
         return view("dashboard");
     }

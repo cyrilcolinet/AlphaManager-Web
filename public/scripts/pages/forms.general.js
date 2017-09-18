@@ -329,10 +329,10 @@ var FormsGeneral = (function($) {
     // Return all the functions under Init
     return {
         Init: function() {
-            initDatePicker();
-            initDateRangePicker()
-            initDropZone();
-            initTypeahead();
+            //initDatePicker();
+            //initDateRangePicker()
+            //initDropZone();
+            //initTypeahead();
             initSelect2();
         }
     }

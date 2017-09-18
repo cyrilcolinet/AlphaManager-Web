@@ -315,11 +315,8 @@ var Sliders = (function($) {
         // Decorated range sliders
         $('#decorating-ion').ionRangeSlider({
             grid: true,
-            min: 18,
-            max: 70,
-            from: 30,
-            prefix: 'Age ',
-            max_postfix: '+'
+            min: 5000,
+            max: 25000
         });
 
 
@@ -369,7 +366,7 @@ var Sliders = (function($) {
     // Return all the functions under Init
     return {
         Init: function() {
-            initNoUISliders();
+            //initNoUISliders();
             initIonRangeSlider();
         }
     }

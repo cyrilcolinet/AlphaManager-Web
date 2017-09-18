@@ -19,8 +19,10 @@
             <div class="panel-x panel-transparent">
                 <!-- Begin Panel Body -->
                 <div class="panel-body">
+                    <a href="{{ route("management.systems.add") }}" class="btn btn-warning w-200 m-sm-r m-sm-b"><i class="fa fa-plus-square fa-fw"></i> Ajouter un système</a>
+
                     <div class="table-responsive">
-                        <button class="btn btn-warning w-200 m-sm-r m-sm-b"><i class="fa fa-plus-square fa-fw"></i> Ajouter un système</button>
+
                         <!-- Begin Table -->
                         <table class="table table-striped">
                             <thead>
@@ -37,13 +39,14 @@
                                 @foreach($data as $key => $value)
                                 <tr>
                                     <td><strong>{{ $key }}</strong></td>
-                                    <td align="center">{!! boolval($value['local']) ? '<span class="badge badge-success"><i class="fa fa-check"></i> Oui</span>' : '<span class="badge badge-danger"><i class="fa fa-times"></i> Non</span>' !!}</td>
-                                    <td>{{ $value['starter-port'] }}</td>
+                                    <td align="center">{!! !boolval($value['local']) ? '<span class="badge badge-success"><i class="fa fa-check"></i> Oui</span>' : '<span class="badge badge-danger"><i class="fa fa-times"></i> Non</span>' !!}</td>
+                                    <td>{{ $value['starter-port'] }} <b>(tcp)</b></td>
                                     <td>{!! $value['maps'] !!}</td>
                                     <td>{{ $value['plugins'] }}</td>
                                     <td align="center">
-                                        <a href="" ><span class="badge badge-info"><i class="fa fa-pencil fa-fw"></i></span></a>
-                                        <a href="{{ route("management.systems.delete", [$value['_name']]) }}"><span class="badge badge-danger"><i class="fa fa-trash fa-fw"></i></span></a>
+                                        <a href="" data-toggle="tooltip" data-placement="top" title="Éditer"><span class="badge badge-info"><i class="fa fa-pencil fa-fw"></i></span></a>
+                                        <a href="{{ route("management.systems.delete", [$value['_name']]) }}" data-toggle="tooltip" data-placement="top" title="Supprimer"><span class="badge badge-danger"><i class="fa fa-trash fa-fw"></i></span></a>
+                                        <a href="{{ route("management.systems.manage", [$value['_name']]) }}" data-toggle="tooltip" data-placement="top" title="Gérer"><span class="badge badge-primary"><i class="fa fa-cogs fa-fw"></i></span></a>
                                     </td>
                                 </tr>
                                 @endforeach

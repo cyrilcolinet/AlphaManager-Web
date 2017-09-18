@@ -47,13 +47,13 @@
                     </div>
 
                     <ul class="sidebar-navigation ul-clear">
-                        <li><a href="{{ route("dashboard") }}"><i class="fa fa-home fa-fw"></i><span>Tableau de bord</span></a></li>
+                        <li class="{{ (Request::is("/")) ? 'open' : ' ' }}"><a href="{{ route("dashboard") }}"><i class="fa fa-home fa-fw"></i><span>Tableau de bord</span></a></li>
 
                         <li class="divider"></li>
 
                         <li class="menu-header text-uppercase"><small>Management</small></li>
 
-                        <li>
+                        <li class="{{ (count(Request::segments()) != 0 && Request::segments()[0] == "owners") ? 'open' : ' ' }}">
                             <a href="javascript:void(0)" data-toggle="nav-submenu"><i class="fa fa-user-secret fa-fw"></i><span>Utilisateurs autorisés</span></a>
                             <ul class="nav-submenu ul-clear">
                                 <li><a href="#"><span>Liste des utilisateurs</span></a></li>
@@ -65,20 +65,19 @@
 
                         <li class="menu-header text-uppercase"><small>Configuration</small></li>
 
-                        <li>
+                        <li class="{{ (count(Request::segments()) != 0 && Request::segments()[0] == "systems") ? 'open' : ' ' }}">
                             <a href="javascript:void(0)" data-toggle="nav-submenu"><i class="fa fa-database fa-fw"></i><span>Systèmes</span></a>
                             <ul class="nav-submenu ul-clear">
-                                <li><a href="{{ route("management.systems.list") }}"><span>Liste des systèmes</span></a></li>
-                                <li><a href="#"><span>Ajouter un système</span></a></li>
-                                <li><a href="#"><span>Gérer un système</span></a></li>
+                                <li class="{{ (Route::currentRouteName() == "management.systems.list") ? 'active' : ' ' }}"><a href="{{ route("management.systems.list") }}"><span>Liste des systèmes</span></a></li>
+                                <li class="{{ (Route::currentRouteName() == "management.systems.add") ? 'active' : ' ' }}"><a href="{{ route("management.systems.add") }}"><span>Ajouter un système</span></a></li>
                             </ul>
                         </li>
 
-                        <li>
+                        <li class="{{ (count(Request::segments()) != 0 && Request::segments()[0] == "maps") ? 'open' : ' ' }}">
                             <a href="javascript:void(0)" data-toggle="nav-submenu"><i class="fa fa-map-signs fa-fw"></i><span>Cartes</span></a>
                             <ul class="nav-submenu ul-clear">
-                                <li><a href="#"><span>Liste des cartes</span></a></li>
-                                <li><a href="#"><span>Ajouter une carte</span></a></li>
+                                <li class="{{ (Route::currentRouteName() == "management.maps.list") ? 'active' : ' ' }}"><a href="#"><span>Liste des cartes</span></a></li>
+                                <li class="{{ (Route::currentRouteName() == "management.maps.add") ? 'active' : ' ' }}"><a href="#"><span>Ajouter une carte</span></a></li>
                             </ul>
                         </li>
                     </ul>
