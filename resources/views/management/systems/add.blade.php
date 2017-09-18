@@ -90,7 +90,7 @@
                                 <div class="checkbox m-lg-t" align="center">
                                     <label for="local" class="checkbox-default success">
                                         <input type="checkbox" name="local" id="local" checked>
-                                        <span>Lancer les instances sur un client</span>
+                                        <span>Lancer les instances sur un client&nbsp;&nbsp;&nbsp;<span class="label label-info">CONSEILLÉ</span></span>
                                     </label>
                                     <p class="m-n-b m-xs-t fs-sm text-grey">Permet de savoir si le serveur lance les instances sur sa machine respective.</p>
                                 </div>
@@ -104,7 +104,7 @@
                         </div>
 
                         <div class="form-group form-group-default input--filled">
-                            <label for="decorating-ion"><i class="fa fa-sitemap m-xs-r"></i>Plage de port</label>
+                            <label for="decorating-ion"><i class="fa fa-sitemap m-xs-r"></i>Port de début</label>
                             <input name="starter-port" id="decorating-ion" value="{{ old("starter-port") }}">
                             <p class="m-n-b m-xs-t fs-sm text-grey">Plage de port sur laquelle les instances seront allouées.</p>
                         </div>
@@ -113,6 +113,14 @@
                             <label for="maps"><i class="fa fa-map-signs m-xs-r"></i>Cartes disponibles</label>
                             <input type="text" class="form-control" id="maps" name="maps" value="{{ old("maps") }}">
                             <p class="m-n-b m-xs-t fs-sm text-grey">Liste des maps du système. Séparer à l'aide de virgules. <b>Le nom des maps de doivent pas contenir d'espaces.</b></p>
+                        </div>
+
+                        <div class="checkbox m-lg-t">
+                            <label for="multi-map" class="checkbox-default danger">
+                                <input type="checkbox" name="multi-map" id="multi-map">
+                                <span><b>Multi cartes&nbsp;&nbsp;&nbsp;<span class="label label-danger">NEW</span></b></span>
+                            </label>
+                            <p class="m-n-b m-xs-t fs-sm text-grey">Si coché, les instances seront lancées avec toutes les maps activées, et non une seule.</p>
                         </div>
 
                         <p>

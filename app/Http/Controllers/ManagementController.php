@@ -73,12 +73,12 @@ class ManagementController extends Controller {
 
             // Traitement des maps
             $maps = explode(",", $array['maps']);
-            $array['maps'] = '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="' . join(", ", $maps) . '">Voir&nbsp;les&nbsp;maps...</a>';
+            $array['maps'] = '<a href="' . route("management.systems.manage", [$array['_name']]) . '" data-toggle="tooltip" data-placement="top" title="' . join(", ", $maps) . '">Voir&nbsp;les&nbsp;maps...</a>';
 
             // Traitement des plugins
             $plugins = explode(",", $array['plugins']);
             $plugins[count($plugins)] = "AlphasiaManagerBukkit";
-            $array['plugins'] = '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="' . join(", ", $plugins) . '">Voir&nbsp;les&nbsp;plugins...</a>';
+            $array['plugins'] = '<a href="' . route("management.systems.manage", [$array['_name']]) . '" data-toggle="tooltip" data-placement="top" title="' . join(", ", $plugins) . '">Voir&nbsp;les&nbsp;plugins...</a>';
 
             $array['multi-map'] = ($array['multi-map'] == "true" ? true : false);
             $data = array_add($data, $systemName, $array);
@@ -120,6 +120,7 @@ class ManagementController extends Controller {
             $data['maps'] = explode(",", $data['maps']);
             $data['maps'] = join(",", $data['maps']);
             $data['local'] = ($data['local'] == "on") ? "false" : "true";
+            $data['multi-map'] = ($data['multi-map'] == "on") ? "true" : "false";
 
             // Database implementation
             $redisKey = "alphamanager:_config:systems:" . $data['name'];
@@ -155,6 +156,7 @@ class ManagementController extends Controller {
         foreach($keys as $key) {
             $keyResult = $connector->hgetall($key);
             $keyResult['startup-mode'] = strtoupper(trim($keyResult['startup-mode']));
+            $keyResult['active'] = ($keyResult['active'] == "true") ? true : false;
             $maps[$keyResult['name']] = $keyResult;
         }
 
